@@ -22,6 +22,7 @@
 // THEN I am prompted to select an employee to update and their new role and this information is updated in the database
 
 const cTable = require('console.table');
+const inquirer = require('inquirer');
 // console.table([
 //     {
 //       name: 'foo',
@@ -37,3 +38,69 @@ const cTable = require('console.table');
 //   ----  ---
 //   foo   10
 //   bar   20
+
+const promptUser = () => {
+    return inquirer.prompt([ 
+        {
+            type: 'list',
+            name: 'options',
+            message: 'What would you like to do?',
+            choices: ['View all departments', 'View all roles', 'View all employees', 'Add a department', 'Add a role', 'Add an employee', 'Update an employee role']
+        }
+    ])
+    .then(data => {
+        
+        if (data.options === 'View all departments'){
+            // console.log("hello")
+            viewDepartments();
+        } 
+        if (data.options === 'View all roles'){
+            viewRoles();
+        }
+        if (data.options === 'View all employees'){
+            viewEmployees();
+        }
+        if (data.options === 'Add a department'){
+            addDepartment();
+        }
+        if (data.options === 'Add a role'){
+            addRole();
+        }
+        if (data.options === 'Add an employee'){
+            addEmployee();
+        }
+        if (data.options === 'Update an employee role'){
+            updateRole();
+        }
+    })
+}
+
+const viewDepartments = () => {
+    console.log('hi');
+}
+
+const viewRoles = () => {
+    console.log('hi');
+}
+
+const viewEmployees = () => {
+    console.log('hi');
+}
+
+const addDepartment = () => {
+    console.log('hi');
+}
+
+const addRole = () => {
+    console.log('hi');
+}
+
+const addEmployee = () => {
+    console.log('hi');
+}
+
+const updateRole = () => {
+    console.log('hi');
+}
+
+promptUser();

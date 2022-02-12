@@ -1,5 +1,6 @@
 const cTable = require('console.table');
 const inquirer = require('inquirer');
+const db = require('./db/connection');
 // console.table([
 //     {
 //       name: 'foo',
@@ -87,4 +88,15 @@ const updateRole = () => {
     // THEN I am prompted to select an employee to update and their new role and this information is updated in the database
 }
 
+
+//does database need to be conencted before promptUser?
+
+db.connect(err => {
+    if (err) throw err;
+    console.log('Database connected.');
+}); 
+
 promptUser();
+
+
+

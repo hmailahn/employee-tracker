@@ -69,17 +69,136 @@ const viewEmployees = () => {
 }
 
 const addDepartment = () => {
-    console.log('hi');
-    // THEN I am prompted to enter the name of the department and that department is added to the database
+    return inquirer.prompt([ 
+        {
+            type: 'text',
+            name: 'name',
+            message: 'What is the name of the department you would like to add?',
+            validate: name => {
+                if (name) {
+                    return true;
+                } else {
+                    console.log('You need to enter a name!');
+                    return false;
+                }
+            }
+            
+        }
+    ])
+    .then(data => {
+        console.log(data);
+    })
+    //  and that department is added to the database
 }
 
 const addRole = () => {
-    console.log('hi');
-    // THEN I am prompted to enter the name, salary, and department for the role and that role is added to the database
+    return inquirer.prompt([ 
+        {
+            type: 'text',
+            name: 'titleName',
+            message: 'What is the name of the role you would like to add?',
+            validate: titleName => {
+                if (titleName) {
+                    return true;
+                } else {
+                    console.log('You need to enter a name!');
+                    return false;
+                }
+            }
+            
+        },
+        {
+            type: 'text',
+            name: 'salary',
+            message: 'What is the salary of the role you would like to add?',
+            validate: salary => {
+                if (salary) {
+                    return true;
+                } else {
+                    console.log('You need to enter a salary!');
+                    return false;
+                }
+            }
+        },
+        {
+            type: 'text',
+            name: 'departmentId',
+            message: 'What is the department ID of the role you would like to add?',
+            validate: departmentId => {
+                if (departmentId) {
+                    return true;
+                } else {
+                    console.log('You need to enter a department ID!');
+                    return false;
+                }
+            }
+        }
+    ])
+    .then(data => {
+        console.log(data);
+    })
+    // and that role is added to the database
 }
 
 const addEmployee = () => {
-    console.log('hi');
+    return inquirer.prompt([ 
+        {
+            type: 'text',
+            name: 'firstName',
+            message: 'What is the first name of the employee you would like to add?',
+            validate: firstName => {
+                if (firstnameName) {
+                    return true;
+                } else {
+                    console.log('You need to enter a name!');
+                    return false;
+                }
+            }
+            
+        },
+        {
+            type: 'text',
+            name: 'lastName',
+            message: 'What is the last name of the employee you would like to add?',
+            validate: lastName => {
+                if (lastName) {
+                    return true;
+                } else {
+                    console.log('You need to enter a last name!');
+                    return false;
+                }
+            }
+        },
+        {
+            type: 'text',
+            name: 'roleId',
+            message: 'What is the role ID of the employee you would like to add?',
+            validate: roleId => {
+                if (roleId) {
+                    return true;
+                } else {
+                    console.log('You need to enter a role ID!');
+                    return false;
+                }
+            }
+        },
+        {
+            type: 'text',
+            name: 'managerId',
+            message: 'What is the manager ID of the employee you would like to add?',
+            validate: managerId => {
+                if (managerId) {
+                    return true;
+                } else {
+                    console.log('You need to enter a manager ID!');
+                    return false;
+                }
+            }
+        }
+    ])
+    .then(data => {
+        console.log(data);
+    })
     // THEN I am prompted to enter the employee’s first name, last name, role, and manager, and that employee is added to the database
 }
 

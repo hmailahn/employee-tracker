@@ -110,7 +110,6 @@ const addDepartment = () => {
         }
     ])
         .then(data => {
-            console.log(data);
             const sql = `INSERT INTO departments (name) VALUES (?)`;
             const params = [
                 data.name
@@ -118,6 +117,7 @@ const addDepartment = () => {
             db.query(sql, params, (err, res) => {
                 if (err) throw err;
                 viewDepartments();
+                console.log(`${data.name} added!`)
             });
 
         })
@@ -179,6 +179,7 @@ const addRole = () => {
             db.query(sql, params, (err, res) => {
                 if (err) throw err;
                 viewRoles();
+                console.log(`${data.titleName} added!`)
             });
 
         })
@@ -245,6 +246,7 @@ const addEmployee = () => {
                 if (err) throw err;
                 console.log(res);
                 viewEmployees();
+                console.log(`${data.firstName} ${data.lastName} added!`)
             });
         })
 }
@@ -273,6 +275,7 @@ const updateRole = () => {
             if (err) throw err;
             console.log(res);
             viewEmployees();
+            console.log(`Role changed to ID ${data.newRole}`)
         });
     });
 }
@@ -290,6 +293,7 @@ const deleteDepartment = () => {
             db.query(sql, params, (err, res) => {
               if (err) throw err;
               viewDepartments();
+              console.log(`Department ID ${data.deleteId} has been deleted!`)
         })
     })
 }
@@ -309,6 +313,7 @@ const deleteRole = () => {
             db.query(sql, params, (err, res) => {
               if (err) throw err;
               viewRoles();
+              console.log(`Role ID ${data.deleteRole} has been deleted!`)
         })
     })
 }
@@ -326,6 +331,7 @@ const deleteEmployee = () => {
             db.query(sql, params, (err, res) => {
               if (err) throw err;
               viewEmployees();
+              console.log(` Employee ID ${data.deleteEmployee} has been deleted!`)
         })
     })  
 }

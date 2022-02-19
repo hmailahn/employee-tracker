@@ -103,9 +103,16 @@ const addDepartment = () => {
     ])
     .then(data => {
         console.log(data);
-        `INSERT INTO departments (name)
-        VALUES 
-        (${data.name});`
+        const sql = `INSERT INTO departments (name) VALUES (?)`;
+        const params = [
+            data.name
+        ];
+        db.query(sql, params, (err, res) => {
+            if (err) throw err;
+            console.table("All Department: ", res);
+            viewDepartments();
+          });
+
     })
     //  and that department is added to the database
 }

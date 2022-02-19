@@ -55,7 +55,11 @@ const promptUser = () => {
 
 const viewDepartments = () => {
     console.log('hi');
-    ////formatted table showing department names and department ids
+    const sql = `SELECT * FROM departments`;
+    db.query(sql, (err, res) => {
+        if (err) throw err;
+        console.table('All Departments:', res);
+    })
 }
 
 const viewRoles = () => {
@@ -87,6 +91,9 @@ const addDepartment = () => {
     ])
     .then(data => {
         console.log(data);
+        `INSERT INTO departments (name)
+        VALUES 
+        (${data.name});`
     })
     //  and that department is added to the database
 }

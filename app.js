@@ -266,8 +266,8 @@ const updateRole = () => {
         const sql = `UPDATE employee SET role_id = ?
             WHERE employee_id = ?`;
         const params = [
-            data.oldRole,
-            data.newRole
+            data.newRole,
+            data.oldRole
         ];
         db.query(sql, params, (err, res) => {
             if (err) throw err;

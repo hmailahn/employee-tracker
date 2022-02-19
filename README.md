@@ -16,4 +16,4 @@ To use this employee tracker, clone the repo onto your local machine. Install my
 ## REPOSIITORY
 https://github.com/hmailahn/employee-tracker
 ## DEMO
-![Demo]()
+[Demo](https://drive.google.com/file/d/18TgkEQwHqmASXQz7EGwDnCE95dS2EGF6/view)

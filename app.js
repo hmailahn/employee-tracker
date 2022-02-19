@@ -30,7 +30,7 @@ const menu = () => {
             type: 'list',
             name: 'options',
             message: 'What would you like to do?',
-            choices: ['View all departments', 'View all roles', 'View all employees', 'Add a department', 'Add a role', 'Add an employee', 'Update employee role', 'EXIT']
+            choices: ['View all departments', 'View all roles', 'View all employees', 'Add a department', 'Add a role', 'Add an employee', 'Update employee role', 'Delete a department', 'Delete a role', 'Delete an employee', 'EXIT']
         }
     ])
         .then(data => {
@@ -56,6 +56,15 @@ const menu = () => {
             }
             if (data.options === 'Update an employee role') {
                 updateRole();
+            }
+            if (data.options === 'Delete a department') {
+                deleteDepartment();
+            }
+            if (data.options === 'Delete a role') {
+                deleteRole();
+            }
+            if (data.options === 'Delete an employee') {
+                deleteEmployee();
             }
             if (data.options === 'EXIT') {
                 db.end();
@@ -285,6 +294,60 @@ const updateRole = () => {
         });
     });
 }
+
+const deleteDepartment = () => {
+    return inquirer.prompt([
+        {
+            type: 'text',
+            name: 'deleteId',
+            message: 'What is the ID of the department you would like to delete?'
+        }
+    ]). then (data => {
+            const sql = `DELETE FROM departments WHERE id = ?`;
+            const params = [data.deleteId];
+            db.query(sql, params, (err, res) => {
+              if (err) throw err;
+              viewDepartments();
+        })
+    })
+}
+
+   
+
+const deleteRole = () => {
+    return inquirer.prompt([
+        {
+            type: 'text',
+            name: 'deleteRole',
+            message: 'What is the ID of the role you would like to delete?'
+        }
+    ]). then (data => {
+            const sql = `DELETE FROM roles WHERE role_id = ?`;
+            const params = [data.deleteRole];
+            db.query(sql, params, (err, res) => {
+              if (err) throw err;
+              viewRoles();
+        })
+    })
+}
+
+const deleteEmployee = () => {
+    return inquirer.prompt([
+        {
+            type: 'text',
+            name: 'deleteEmployee',
+            message: 'What is the ID of the employee you would like to delete?'
+        }
+    ]). then (data => {
+            const sql = `DELETE FROM employee WHERE employee_id = ?`;
+            const params = [data.deleteEmployee];
+            db.query(sql, params, (err, res) => {
+              if (err) throw err;
+              viewEmployees();
+        })
+    })  
+}
+
 
 db.connect(err => {
     if (err) throw err;

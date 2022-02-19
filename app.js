@@ -30,7 +30,7 @@ const menu = () => {
             type: 'list',
             name: 'options',
             message: 'What would you like to do?',
-            choices: ['View all departments', 'View all roles', 'View all employees', 'Add a department', 'Add a role', 'Add an employee', 'Update an employee role', 'EXIT']
+            choices: ['View all departments', 'View all roles', 'View all employees', 'Add a department', 'Add a role', 'Add an employee', 'Update employee role', 'EXIT']
         }
     ])
         .then(data => {
@@ -257,6 +257,7 @@ const addEmployee = () => {
         })
 }
 
+//works
 const updateRole = () => {
     return inquirer.prompt([
         {
@@ -281,15 +282,9 @@ const updateRole = () => {
             if (err) throw err;
             console.log(res);
             viewEmployees();
-        })
-            // THEN I am prompted to select an employee to update and their new role 
-            //and this information is updated in the database
-        })
-
-
-
+        });
+    });
 }
-
 
 db.connect(err => {
     if (err) throw err;

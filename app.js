@@ -2,28 +2,12 @@ const cTable = require('console.table');
 const inquirer = require('inquirer');
 const { query } = require('./db/connection');
 const db = require('./db/connection');
-// console.table([
-//     {
-//       name: 'foo',
-//       age: 10
-//     }, {
-//       name: 'bar',
-//       age: 20
-//     }
-//   ]);
 
-//   // prints
-//   name  age
-//   ----  ---
-//   foo   10
-//   bar   20
-
-//done
 const promptUser = () => {
     menu();
 }
 
-//done
+
 const menu = () => {
     return inquirer.prompt([
         {
@@ -36,7 +20,6 @@ const menu = () => {
         .then(data => {
 
             if (data.options === 'View all departments') {
-                // console.log("hello")
                 viewDepartments();
             }
             if (data.options === 'View all roles') {
@@ -72,7 +55,7 @@ const menu = () => {
         })
 }
 
-//done
+
 const viewDepartments = () => {
     const sql = `SELECT * FROM departments`;
     db.query(sql, (err, res) => {
@@ -82,7 +65,7 @@ const viewDepartments = () => {
     })
 }
 
-//done
+
 const viewRoles = () => {
     const sql = `SELECT * FROM roles`;
     db.query(sql, (err, res) => {
@@ -108,7 +91,7 @@ const viewEmployees = () => {
     })
 }
 
-//works
+
 const addDepartment = () => {
     return inquirer.prompt([
         {
@@ -141,7 +124,7 @@ const addDepartment = () => {
 
 }
 
-//works
+
 const addRole = () => {
     return inquirer.prompt([
         {
@@ -200,7 +183,7 @@ const addRole = () => {
 
         })
 }
-//works
+
 const addEmployee = () => {
     return inquirer.prompt([
         {
@@ -266,7 +249,6 @@ const addEmployee = () => {
         })
 }
 
-//works
 const updateRole = () => {
     return inquirer.prompt([
         {

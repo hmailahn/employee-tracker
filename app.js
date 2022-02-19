@@ -83,6 +83,7 @@ const viewRoles = () => {
     })
 }
 
+//works
 const viewEmployees = () => {
     const sql = `SELECT employee.employee_id, employee.first_name, employee.last_name, employee.manager_id, roles.title_name, roles.salary, departments.id
     FROM employee
@@ -190,7 +191,7 @@ const addRole = () => {
 
     })
 }
-//works? need to create pull for employee table first
+//works
 const addEmployee = () => {
     return inquirer.prompt([ 
         {
@@ -251,7 +252,7 @@ const addEmployee = () => {
         db.query(sql, params, (err, res) => {
             if (err) throw err;
             console.log(res)
-            // viewEmployees();
+            viewEmployees();
           });
     })
 }

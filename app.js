@@ -1,5 +1,6 @@
 const cTable = require('console.table');
 const inquirer = require('inquirer');
+const { query } = require('./db/connection');
 const db = require('./db/connection');
 // console.table([
 //     {
@@ -18,12 +19,16 @@ const db = require('./db/connection');
 //   bar   20
 
 const promptUser = () => {
+ menu();
+}
+
+const menu = () => {
     return inquirer.prompt([ 
         {
             type: 'list',
             name: 'options',
             message: 'What would you like to do?',
-            choices: ['View all departments', 'View all roles', 'View all employees', 'Add a department', 'Add a role', 'Add an employee', 'Update an employee role']
+            choices: ['View all departments', 'View all roles', 'View all employees', 'Add a department', 'Add a role', 'Add an employee', 'Update an employee role', 'EXIT']
         }
     ])
     .then(data => {
@@ -50,21 +55,28 @@ const promptUser = () => {
         if (data.options === 'Update an employee role'){
             updateRole();
         }
+        if(data.options === 'EXIT') {
+            db.end();
+        }
     })
 }
 
 const viewDepartments = () => {
-    console.log('hi');
     const sql = `SELECT * FROM departments`;
     db.query(sql, (err, res) => {
         if (err) throw err;
         console.table('All Departments:', res);
+        menu();
     })
 }
 
 const viewRoles = () => {
-    console.log('hi');
-    // THEN I am presented with the job title, role id, the department that role belongs to, and the salary for that role
+    const sql = `SELECT * FROM roles`;
+    db.query(sql, (err, res) => {
+        if (err) throw err;
+        console.table('All roles:', res);
+        menu();
+    })
 }
 
 const viewEmployees = () => {

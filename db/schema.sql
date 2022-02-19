@@ -12,7 +12,7 @@ CREATE TABLE roles (
     title_name VARCHAR(30) NOT NULL,
     salary DECIMAL (10,2) NOT NULL,
     department_id INTEGER NOT NULL,
-    FOREIGN KEY (department_id) REFERENCES departments(id) 
+    CONSTRAINT fk_department FOREIGN KEY (department_id) REFERENCES departments(id) 
 );
 
 -- need to figure out manaager foreing key still

@@ -18,10 +18,12 @@ const db = require('./db/connection');
 //   foo   10
 //   bar   20
 
+//done
 const promptUser = () => {
  menu();
 }
 
+//done
 const menu = () => {
     return inquirer.prompt([ 
         {
@@ -61,6 +63,7 @@ const menu = () => {
     })
 }
 
+//done
 const viewDepartments = () => {
     const sql = `SELECT * FROM departments`;
     db.query(sql, (err, res) => {
@@ -70,6 +73,7 @@ const viewDepartments = () => {
     })
 }
 
+//done
 const viewRoles = () => {
     const sql = `SELECT * FROM roles`;
     db.query(sql, (err, res) => {
@@ -84,6 +88,7 @@ const viewEmployees = () => {
     // THEN I am presented with a formatted table showing employee data, including employee ids, first names, last names, job titles, departments, salaries, and managers that the employees report to
 }
 
+//works
 const addDepartment = () => {
     return inquirer.prompt([ 
         {
@@ -109,14 +114,14 @@ const addDepartment = () => {
         ];
         db.query(sql, params, (err, res) => {
             if (err) throw err;
-            console.table("All Department: ", res);
             viewDepartments();
           });
 
     })
-    //  and that department is added to the database
+
 }
 
+//works
 const addRole = () => {
     return inquirer.prompt([ 
         {
@@ -162,8 +167,18 @@ const addRole = () => {
     ])
     .then(data => {
         console.log(data);
+        const sql = `INSERT INTO roles (title_name, salary, department_id) VALUES (?,?,?)`;
+        const params = [
+            data.titleName,
+            data.salary,
+            data.departmentId
+        ];
+        db.query(sql, params, (err, res) => {
+            if (err) throw err;
+            viewRoles();
+          });
+
     })
-    // and that role is added to the database
 }
 
 const addEmployee = () => {

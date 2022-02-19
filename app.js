@@ -84,8 +84,18 @@ const viewRoles = () => {
 }
 
 const viewEmployees = () => {
-    console.log('hi');
-    // THEN I am presented with a formatted table showing employee data, including employee ids, first names, last names, job titles, departments, salaries, and managers that the employees report to
+    const sql = `SELECT employee.employee_id, employee.first_name, employee.last_name, employee.manager_id, roles.title_name, roles.salary, departments.id
+    FROM employee
+    LEFT JOIN roles
+    ON employee.role_id = roles.role_id
+    LEFT JOIN departments
+    ON roles.department_id = departments.id`;
+
+    db.query(sql, (err, res) => {
+        if (err) throw err;
+        console.table('All employees: ', res);
+        menu();
+    })
 }
 
 //works
@@ -180,7 +190,7 @@ const addRole = () => {
 
     })
 }
-
+//works? need to create pull for employee table first
 const addEmployee = () => {
     return inquirer.prompt([ 
         {
@@ -188,7 +198,7 @@ const addEmployee = () => {
             name: 'firstName',
             message: 'What is the first name of the employee you would like to add?',
             validate: firstName => {
-                if (firstnameName) {
+                if (firstName) {
                     return true;
                 } else {
                     console.log('You need to enter a name!');
@@ -226,21 +236,24 @@ const addEmployee = () => {
         {
             type: 'text',
             name: 'managerId',
-            message: 'What is the manager ID of the employee you would like to add?',
-            validate: managerId => {
-                if (managerId) {
-                    return true;
-                } else {
-                    console.log('You need to enter a manager ID!');
-                    return false;
-                }
-            }
+            message: 'What is the manager ID of the employee you would like to add?'
         }
     ])
     .then(data => {
         console.log(data);
+        const sql = `INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?,?,?,?)`;
+        const params = [
+            data.firstName,
+            data.lastName,
+            data.roleId,
+            data.managerId
+        ];
+        db.query(sql, params, (err, res) => {
+            if (err) throw err;
+            console.log(res)
+            // viewEmployees();
+          });
     })
-    // THEN I am prompted to enter the employee’s first name, last name, role, and manager, and that employee is added to the database
 }
 
 const updateRole = () => {

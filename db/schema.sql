@@ -15,17 +15,15 @@ CREATE TABLE roles (
     CONSTRAINT fk_department FOREIGN KEY (department_id) REFERENCES departments(id) 
 );
 
--- need to figure out manaager foreing key still
+
 CREATE TABLE employee (
     employee_id INTEGER AUTO_INCREMENT PRIMARY KEY,
     first_name VARCHAR(30) NOT NULL,
     last_name VARCHAR(30) NOT NULL,
     role_id INTEGER NOT NULL,
-    manager_id INTEGER, -- need to figure out manaager foreing key still
+    manager_id INTEGER, 
     FOREIGN KEY (role_id) REFERENCES roles(role_id),
     FOREIGN KEY (manager_id) REFERENCES employee(employee_id)
 );
-
-
 
 

@@ -85,7 +85,7 @@ const viewRoles = () => {
 
 //works
 const viewEmployees = () => {
-    const sql = `SELECT employee.employee_id, employee.first_name, employee.last_name, employee.manager_id, roles.title_name, roles.salary, departments.id
+    const sql = `SELECT employee.employee_id, employee.first_name, employee.last_name, employee.manager_id, roles.title_name, roles.salary, departments.id AS department
     FROM employee
     LEFT JOIN roles
     ON employee.role_id = roles.role_id
@@ -251,7 +251,7 @@ const addEmployee = () => {
         ];
         db.query(sql, params, (err, res) => {
             if (err) throw err;
-            console.log(res)
+            console.log(res);
             viewEmployees();
           });
     })
@@ -262,8 +262,6 @@ const updateRole = () => {
     // THEN I am prompted to select an employee to update and their new role and this information is updated in the database
 }
 
-
-//does database need to be conencted before promptUser?
 
 db.connect(err => {
     if (err) throw err;

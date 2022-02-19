@@ -37,7 +37,7 @@ const menu = () => {
             if (data.options === 'Add an employee') {
                 addEmployee();
             }
-            if (data.options === 'Update an employee role') {
+            if (data.options === 'Update employee role') {
                 updateRole();
             }
             if (data.options === 'Delete a department') {
